@@ -19,11 +19,27 @@ class GoogleCalendarInitView(APIView):
         authorization_url, state = flow.authorization_url(
             access_type='offline',
             include_granted_scopes='true')
-        # oauth_url = google_apis_oauth.get_authorization_url(
-        #     JSON_FILEPATH, SCOPES, GOOGLE_OAUTH_REDIRECT_URI)
+    
         return HttpResponseRedirect(authorization_url)
 
 class GoogleCalendarRedirectView(APIView):
-    pass
+    def get(self,request):
+        try:
+            flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+                JSON_FILEPATH,
+                scopes=SCOPES,
+            )
+
+            flow.redirect_uri = GOOGLE_OAUTH_REDIRECT_URI
+            authorization_response = request.build_absolute_uri()
+            flow.fetch_token(authorization_response=authorization_response)
+
+            credentials = flow.credentials
+
+            return HttpResponse(credentials.to_json())
+        except Exception as e:
+            return HttpResponse(e)
+
+
 
     
