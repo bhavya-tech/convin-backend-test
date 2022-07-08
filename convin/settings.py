@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'calender',
     "sslserver",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GOOGLE_OAUTH_REDIRECT_URI = "https://localhost:8000/rest/v1/calendar/redirect/"
 
-SCOPES = ['https://www.googleapis.com/auth/calendar']
+OAUTH_SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-JSON_FILEPATH = os.path.join(os.getcwd(), "secrets/client_id.json")
+GOOGLE_OAUTH_JSON = os.path.join(os.getcwd(), "secrets/client_id.json")
