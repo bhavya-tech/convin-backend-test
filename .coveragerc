@@ -1,0 +1,11 @@
+[report]
+exclude_lines =
+    def __repr__
+    def __str__
+
+[run]
+omit =
+    */migrations/*
+    */__init__.py
+    manage.py
+    */tests/*
