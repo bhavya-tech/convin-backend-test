@@ -50,7 +50,7 @@ class GoogleCalendarRedirectView(APIView):
             events = events_result.get('items', [])
 
             if not events:
-                return HttpResponse('No upcoming events found.')
+                return Response('No upcoming events found.')
 
             else:
                 return Response(events)
