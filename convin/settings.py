@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-
-
 from dotenv import load_dotenv
+
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG','True') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -134,8 +134,8 @@ MEDIA_ROOT = os.getenv('MEDIA_ROOT',os.path.join(BASE_DIR, 'media'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# OAuth2 settings
 GOOGLE_OAUTH_REDIRECT_URI = "https://localhost:8000/rest/v1/calendar/redirect/"
-
 OAUTH_SCOPES = ['https://www.googleapis.com/auth/calendar']
-
 GOOGLE_OAUTH_JSON = os.path.join(os.getcwd(), "secrets/client_id.json")
