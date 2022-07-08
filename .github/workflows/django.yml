@@ -29,11 +29,10 @@ jobs:
     - name: Create client_id.json
       run: |
         mkdir secrets
-        touch secrets/client_id.json
         echo "${{secrets.GOOGLE_OAUTH_CLIENT_JSON}}" >> secrets/client_id.json
 
     - name: Coverage Report and Test
       run: |
-        coverage run --concurrency=multiprocessing manage.py test --parallel=3
+        coverage run manage.py test
         coverage combine
         coverage report
