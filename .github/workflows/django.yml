@@ -33,6 +33,6 @@ jobs:
 
     - name: Coverage Report and Test
       run: |
-        coverage run manage.py test
+        coverage run --concurrency=multiprocessing manage.py test --parallel=2
         coverage combine
         coverage report
