@@ -20,12 +20,18 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -q -r requirements.txt
         
     - name: Create env file
       run: |
         echo "SECRET_KEY=${{secrets.SECRET_KEY}}" >> .env
-        
+      
+    - name: Create client_id.json
+      run: |
+        mkdir secrets
+        touch secrets/client_id.json
+        echo "${{secrets.GOOGLE_OAUTH_CLIENT_JSON}}" >> secrets/client_id.json
+
     - name: Coverage Report and Test
       run: |
         coverage run --concurrency=multiprocessing manage.py test --parallel=3
